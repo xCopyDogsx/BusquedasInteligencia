@@ -36,7 +36,7 @@ using namespace std;
 typedef map<string, vector<string>> Grafo;
 
 //Definición de metodos para usar de manera recursiva 
-bool busqueda_profunidad_iterativa(const Grafo &grafo,string origen,string destino);
+bool busqueda_profundidad_iterativa(const Grafo &grafo,string origen,string destino);
 bool busqueda_profundidad_limitada(const Grafo &grafo,string origen,string destino,int profundidad);
 
 /*-------Busqueda en profundidad básica-------------*/
@@ -49,13 +49,11 @@ vector<string> busqueda_profundidad(const Grafo &grafo,const string &origen="A",
     vector<string> recorrido;
     visitados.push_back(origen);//El primer visitado será el origen por eso se añade
     pila.push(origen);//Añadimos el origen a la pila
-    cout<<"----Pila---"<<endl;
     while (!pila.empty())
     {  
         //Mientras que nuestra pila no este vacia hacer:
         auto const &vertice = pila.top();//Tomamos el primer elemento de la pila
         recorrido.push_back(vertice); //Añadimos el origen a la pila
-        cout<<pila.top()<<endl;      
         if(strcmp(vertice.c_str(),destino.c_str())==0){//Si hubo éxito en la busqueda STOP
             break;
         }  
@@ -68,10 +66,6 @@ vector<string> busqueda_profundidad(const Grafo &grafo,const string &origen="A",
                     pila.push(ady);//Apilamos a la pila ese nodo para expandirlo 
                 }
         }
-    }
-    cout<<"----Nodos visitados---"<<endl;
-    for(int i=0;i<visitados.size();++i){
-        cout<<visitados.at(i)<<endl;
     }
     return recorrido;
 }
@@ -111,12 +105,12 @@ vector<string> busqueda_amplitud(const Grafo &grafo,const string &origen="A",con
 /*--------Profundidad iterativa ----------------*/
 //Pseudo: https://es.wikipedia.org/wiki/Búsqueda_en_profundidad_iterativa 
 
-bool busqueda_profunidad_iterativa(const Grafo &grafo,string origen,string destino){
+bool  busqueda_profundidad_iterativa(const Grafo &grafo,string origen,string destino){
   int profundidad = 0; //Se crea la profundidad para nuestro recorrido 
   auto resultado=false; //Una variable de control para romper el bucle infinito
   while(!resultado){//Mientras que no termine nuestra busqueda ejecutaremos una BPL para encontrar el nodo obetivo
      resultado=busqueda_profundidad_limitada(grafo,origen,destino,profundidad);
-     profundidad++; //Aumentamos la profundidad     
+     profundidad++; //Aumentamos la profundidad   
   }
    return resultado;
 }
@@ -141,6 +135,7 @@ bool busqueda_profundidad_limitada(const Grafo &grafo,string origen,string desti
             }
         }
     }
+   
     return resultado;
 }
 
@@ -163,7 +158,6 @@ vector<string> busqueda_amplitud_iterativa(const Grafo &grafo,const string &orig
         if(strcmp(vertice.c_str(),destino.c_str())==0){//Si hubo éxito en la busqueda STOP
             break;
         }  
-       
         cout<<"Niveles de anchura: "<<anchura<<endl;
         cola.pop(); //Vaciamos la cola
         auto const &adyacentes = grafo.at(vertice); //Buscamos el nodo en el grafo.at()

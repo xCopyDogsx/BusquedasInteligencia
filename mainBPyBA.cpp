@@ -60,10 +60,27 @@ int main(){
     grafo["N"] = {};
     grafo["O"] = {};
     cout<<grafo;//Se usa la sobrecarga del operador << para imprimir el grafo
-    cout<<"------Amplitud iterativa------"<<endl;
-    vector<string> recorrido2 =  busqueda_amplitud_iterativa(grafo,"A","F");
-    for(auto const &vertice: recorrido2){
+    cout<<"-----Profundidad------"<<endl;
+    vector<string> profu =  busqueda_profundidad(grafo,"A","O");
+    for(auto const &vertice: profu){
         cout<<vertice<<endl;
+    }
+    cout<<"-----Amplitud--------"<<endl;
+    vector<string> ampli =  busqueda_amplitud(grafo,"A","O");
+    for(auto const &vertice: ampli){
+        cout<<vertice<<endl;
+    }
+    cout<<"-----Amplitud iterativa----"<<endl;
+    vector<string> ampli_iter =  busqueda_amplitud_iterativa(grafo,"A","O");
+    for(auto const &vertice: ampli_iter){
+        cout<<vertice<<endl;
+    }
+    cout<<"------Profundidad iterativa------"<<endl;
+    bool recorrido =  busqueda_profundidad_iterativa(grafo,"A","O");
+    if(recorrido){
+        cout<<"El nodo si se encontro "<<endl;
+    }else{
+        cout<<"El nodo no se encontro "<<endl;
     }
     return 0;
 }
